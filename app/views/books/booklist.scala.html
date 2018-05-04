@@ -1,47 +1,24 @@
 @(books : List[Book])(page: Integer)(pageCount: Integer)
-
 @page_link(pageNum: Integer, text: String, isDisabled: Boolean=false) = {
-<li class="page-item @if(pageNum==page){ active } @if(isDisabled){ disabled }">
-    <span class="page-link" data-pagenum="@pageNum" name="page_link">@text</span>
-    <!--<a class="page-link" href="@routes.BooksController.index(pageNum)">@text</a>-->
-</li>
-}
-
-
-    @for(book <- books){
+    <li class="page-item @if(pageNum==page){ active } @if(isDisabled){ disabled }">
+        <span class="page-link" data-pagenum="@pageNum" name="page_link">@text</span>
+    </li>}
+@for(book <- books){
     <div class="row">
         <div class="col">
             <h3>@book.title</h3>
-            @if(book.price!=null){
-            <p>Price: $@("%.2f".format(book.price))</p>
-            }else{
-            <p>Price: n/a</p>
-            }
-            @if(book.author!=null&&book.author!=""){
-            <p>Author: @book.author</p>
-            }else{
-            <p>Author: unknown</p>
-            }
-            <p>
-                <a href="@routes.BooksController.show(book.id)">View</a>
+            @if(book.price!=null){<p>Price: $@("%.2f".format(book.price))</p>}else{<p>Price: n/a</p>}
+            @if(book.author!=null&&book.author!=""){<p>Author: @book.author</p>}else{<p>Author: unknown</p>}
+            <p><a href="@routes.BooksController.show(book.id)">View</a>
             </p>
         </div>
-    </div>
-    }
+    </div>}
     <br/>
     <nav>
         <ul class="pagination justify-content-center">
             @if(page>1){
-            @page_link(page-1,"Previous")
-            } else {
-            @page_link(page,"Previous",true)
-            }
-            @if(page+1<=pageCount){
-            @page_link(page+1,"Next")
-            }else{
-            @page_link(page,"Next",true)
-            }
+            @page_link(page-1,"Previous") } else { @page_link(page,"Previous",true) }
+            @if(page+1<=pageCount){ @page_link(page+1,"Next") }else{ @page_link(page,"Next",true) }
         </ul>
         <center>Page @page of @pageCount</center>
-
     </nav>

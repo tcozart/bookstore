@@ -31,7 +31,6 @@ public class BooksController extends Controller {
         Integer pagecount=(int)Math.ceil((double)books.size()/(double)PAGE_SIZE);
         if (page>pagecount)
             return redirect(routes.BooksController.index(pagecount));
-        //List<Book> booksSubset = books.subList(0,0);
         List<Book> booksSubset=books.subList((page-1)*PAGE_SIZE,(page*PAGE_SIZE<=books.size()?page*PAGE_SIZE:books.size()));
         return ok(index.render(booksSubset,page,pagecount));
 
