@@ -1,0 +1,9 @@
+@(responseCode: Integer)(responseText: String)
+
+@layout("Unauthorized") {
+<div class="jumbotron">
+    <h1>@responseCode</h1>
+    <h3>@responseText</h3>
+</div>
+<h4><a href="@routes.HomeController.index()">Back</a></h4>
+}

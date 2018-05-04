@@ -1,0 +1,24 @@
+@(book: Book)
+@import helper._
+
+@layout(book.title){
+        <h1>@book.title</h1>
+        @if(book.author!=null&&book.author!=""){
+        <h4>@book.author</h4>
+        }
+        @if(book.price!=null){
+        <p>$@("%.2f".format(book.price))</p>
+        }
+
+        <br/><br/>
+        @if(requestHeader.session.get("username")){
+                <a class="btn btn-primary" href="@routes.BooksController.edit(book.id)">Edit</a>
+                <!--<a class="btn btn-danger" href="@routes.BooksController.delete(book.id)">Delete</a>-->
+                <button class="btn btn-danger" id="delete" data-status="@book.id">Delete</button>
+        }
+        &nbsp;
+        <a href="@routes.BooksController.index()">Back</a>
+        @helper.CSRF.formField
+        <script src="@routes.Assets.versioned("javascripts/deleteRequest.js")" type="text/javascript"></script>
+
+}

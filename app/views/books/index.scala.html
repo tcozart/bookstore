@@ -1,0 +1,16 @@
+@(books : List[Book])(page: Integer)(pageCount: Integer)
+
+@layout("All Books"){
+@if(flash.containsKey("message")){
+<div id="message" class="alert alert-@flash.get("message_type")">
+@flash.get("message")
+</div>
+}
+<h1>All Books</h1>
+<hr/>
+<div class="container" id="books">
+@booklist(books)(page)(pageCount)
+</div>
+<script src="@routes.Assets.versioned("javascripts/fadeout.js")" type="text/javascript"></script>
+<script src="@routes.Assets.versioned("javascripts/fetchbooks.js")" type="text/javascript"></script>
+}

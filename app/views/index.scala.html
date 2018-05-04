@@ -1,0 +1,18 @@
+@()
+
+@layout("Welcome to Play!") {
+    <div>
+        <img class="d-block w-100" src="@routes.Assets.versioned("images/books.jpg")"">
+        <div class="centered">
+        <h1>Welcome to Play!</h1>
+        <h3>Bookstore Tutorial Web Application</h3>
+        </div>
+        <hr/>
+        <h4>
+        <nav class="nav">
+            <a href="@routes.BooksController.index()">All Books</a>
+
+        </nav>
+        </h4>
+    </div>
+}

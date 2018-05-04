@@ -1,0 +1,20 @@
+@(bookForm: Form[Book])(id: Integer)
+@import helper._
+
+@layout("Update Book"){
+    <h1>Update Book</h1>
+    @if(flash.containsKey("message")){
+        <div id="message" class="alert alert-@flash.get("message_type")">
+        @flash.get("message")
+        </div>
+    }
+    @helper.form(action=helper.CSRF(routes.BooksController.update(id))){
+        @helper.inputText(bookForm("id"),'readonly->"readonly",'class->"form-control",'_label->"ID")
+        @helper.inputText(bookForm("title"), 'class -> "form-control", '_label -> "Title *", '_showConstraints -> false)
+        @helper.inputText(bookForm("price"), 'class -> "form-control", '_label -> "Price (USD)")
+        @helper.inputText(bookForm("author"), 'class -> "form-control", '_label -> "Author")
+        <button class="btn btn-success" type="submit">Update Book</button>
+        &nbsp;
+        <a href="@routes.BooksController.index()">Back</a>
+    }
+}
